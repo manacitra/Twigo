@@ -1,0 +1,174 @@
+---
+? https://graph.facebook.com/v3.1/search?type=place&fields=name,checkins,picture&q=sea&center=24.7943758,120.9715205&distance=10000
+: !ruby/object:HTTParty::Response
+  request: !ruby/object:HTTParty::Request
+    changed_hosts: false
+    credentials_sent: false
+    http_method: !ruby/class 'Net::HTTP::Get'
+    options:
+      :limit: 5
+      :assume_utf16_is_big_endian: true
+      :default_params: {}
+      :follow_redirects: true
+      :parser: !ruby/class 'HTTParty::Parser'
+      :uri_adapter: !ruby/module 'URI'
+      :connection_adapter: !ruby/class 'HTTParty::ConnectionAdapter'
+      :headers:
+        Authorization: Bearer 337009123530400|IYSxsRlc6n6ARCp-TvCbQi95bbQ
+    path: !ruby/object:URI::HTTPS
+      scheme: https
+      user: 
+      password: 
+      host: graph.facebook.com
+      port: 443
+      path: "/v3.1/search"
+      query: type=place&fields=name,checkins,picture&q=sea&center=24.7943758,120.9715205&distance=10000
+      opaque: 
+      fragment: 
+      parser: &1 !ruby/object:URI::RFC3986_Parser
+        regexp:
+          :SCHEME: !ruby/regexp /\A[A-Za-z][A-Za-z0-9+\-.]*\z/
+          :USERINFO: !ruby/regexp /\A(?:%\h\h|[!$&-.0-;=A-Z_a-z~])*\z/
+          :HOST: !ruby/regexp /\A(?:(?<IP-literal>\[(?:(?<IPv6address>(?:\h{1,4}:){6}(?<ls32>\h{1,4}:\h{1,4}|(?<IPv4address>(?<dec-octet>[1-9]\d|1\d{2}|2[0-4]\d|25[0-5]|\d)\.\g<dec-octet>\.\g<dec-octet>\.\g<dec-octet>))|::(?:\h{1,4}:){5}\g<ls32>|\h{,4}::(?:\h{1,4}:){4}\g<ls32>|(?:(?:\h{1,4}:)?\h{1,4})?::(?:\h{1,4}:){3}\g<ls32>|(?:(?:\h{1,4}:){,2}\h{1,4})?::(?:\h{1,4}:){2}\g<ls32>|(?:(?:\h{1,4}:){,3}\h{1,4})?::\h{1,4}:\g<ls32>|(?:(?:\h{1,4}:){,4}\h{1,4})?::\g<ls32>|(?:(?:\h{1,4}:){,5}\h{1,4})?::\h{1,4}|(?:(?:\h{1,4}:){,6}\h{1,4})?::)|(?<IPvFuture>v\h+\.[!$&-.0-;=A-Z_a-z~]+))\])|\g<IPv4address>|(?<reg-name>(?:%\h\h|[!$&-.0-9;=A-Z_a-z~])*))\z/
+          :ABS_PATH: !ruby/regexp /\A\/(?:%\h\h|[!$&-.0-;=@-Z_a-z~])*(?:\/(?:%\h\h|[!$&-.0-;=@-Z_a-z~])*)*\z/
+          :REL_PATH: !ruby/regexp /\A(?:%\h\h|[!$&-.0-;=@-Z_a-z~])+(?:\/(?:%\h\h|[!$&-.0-;=@-Z_a-z~])*)*\z/
+          :QUERY: !ruby/regexp /\A(?:%\h\h|[!$&-.0-;=@-Z_a-z~\/?])*\z/
+          :FRAGMENT: !ruby/regexp /\A(?:%\h\h|[!$&-.0-;=@-Z_a-z~\/?])*\z/
+          :OPAQUE: !ruby/regexp /\A(?:[^\/].*)?\z/
+          :PORT: !ruby/regexp /\A[\x09\x0a\x0c\x0d ]*\d*[\x09\x0a\x0c\x0d ]*\z/
+    last_uri: !ruby/object:URI::HTTPS
+      scheme: https
+      user: 
+      password: 
+      host: graph.facebook.com
+      port: 443
+      path: "/v3.1/search"
+      query: type=place&fields=name,checkins,picture&q=sea&center=24.7943758,120.9715205&distance=10000
+      opaque: 
+      fragment: 
+      parser: *1
+    raw_request: !ruby/object:Net::HTTP::Get
+      method: GET
+      request_has_body: false
+      response_has_body: true
+      uri: 
+      path: "/v3.1/search?type=place&fields=name,checkins,picture&q=sea&center=24.7943758,120.9715205&distance=10000"
+      decode_content: true
+      header:
+        authorization:
+        - Bearer 337009123530400|IYSxsRlc6n6ARCp-TvCbQi95bbQ
+        connection:
+        - close
+        host:
+        - graph.facebook.com
+      body: 
+      body_stream: 
+      body_data: 
+    last_response: &2 !ruby/object:Net::HTTPOK
+      http_version: '1.1'
+      code: '200'
+      message: OK
+      header:
+        etag:
+        - '"592338fdce87a5699e664c3a583c136446d7715c"'
+        expires:
+        - Sat, 01 Jan 2000 00:00:00 GMT
+        content-type:
+        - text/javascript; charset=UTF-8
+        facebook-api-version:
+        - v3.1
+        x-fb-trace-id:
+        - D8WY+bKzhIT
+        x-fb-rev:
+        - '4418184'
+        x-app-usage:
+        - '{"call_count":0,"total_cputime":0,"total_time":0}'
+        cache-control:
+        - private, no-cache, no-store, must-revalidate
+        pragma:
+        - no-cache
+        strict-transport-security:
+        - max-age=15552000; preload
+        access-control-allow-origin:
+        - "*"
+        vary:
+        - Accept-Encoding
+        x-fb-debug:
+        - "/ESdAdEkEhETgGsDAVmbmhjbfkLY68FDrVQVi5qS2f0FMvVNZ4YeeWRPJImtCH91J0rYCmgfMpo2QBactZLCpQ=="
+        date:
+        - Sat, 13 Oct 2018 05:16:20 GMT
+        transfer-encoding:
+        - chunked
+        connection:
+        - close
+      body: '{"data":[{"name":"Sean Twinkle","checkins":149,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/39390215_1855474711200017_2972631691165696000_n.png?_nc_cat=107&oh=b1ea376e7ecff7e6def073d4335d139b&oe=5C14AEF4","width":50}},"id":"861058253975006"},{"name":"Sean&Carrie
+        \u5410\u53f8\u76d2\u5b50","checkins":99,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/31723285_1945146995519405_8400778275164520448_n.jpg?_nc_cat=105&oh=0136643424d3d3359237063f90c94432&oe=5C543269","width":50}},"id":"1938553146178790"},{"name":"Sean
+        & Kit''s Wedding","checkins":3,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/30653086_234868160405498_8150114414582824960_n.png?_nc_cat=108&oh=303bd390eda74e181d991a930b56f8b4&oe=5C4CF8F1","width":50}},"id":"234880623737585"},{"name":"Seasaw","checkins":126,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"138103329650118"},{"name":"\u6d77\u5df7\u6d77\u9bae\u71d2\u7269
+        seafood","checkins":462,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/13265925_1031757830225393_4907566688689921257_n.jpg?_nc_cat=103&oh=f7ca1092e41adcc12941099785fd7b87&oe=5C4F4EBD","width":50}},"id":"1000781196656390"},{"name":"Seattle\u54c1\u670d\u98fe","checkins":15,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"538996762814513"},{"name":"\u6d77\u54e1\u97f3\u6a02Pub
+        (Sea Man)","checkins":0,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c106.23.289.289\/s50x50\/381317_483456115006984_872895755_n.jpg?_nc_cat=110&oh=158711d8a2cfe862ac4ca6ada002031a&oe=5C16B0BC","width":50}},"id":"1027198997299357"},{"name":"\u6d77\u9dd7\u2027K\u4eba\u8072\u6a02\u5718
+        Seagull-K Vocal Band","checkins":2,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c3.0.50.50\/p50x50\/226677_10151932327574550_138137865_n.png?_nc_cat=110&oh=ed38439e567903c92a1715ff3d7815cf&oe=5C150741","width":50}},"id":"10155419382064550"},{"name":"\u3010\u65e5\u97d3\u5718\u8cfc\u9023\u7dda\u3011Seattle\u5973\u88dd\u7cbe\u54c1-\u95dc\u65b0\u5e97","checkins":45,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/21078599_1421536804596139_992851021369981916_n.jpg?_nc_cat=102&oh=e52c94908538e8230e8e398e08b99c8f&oe=5C46C863","width":50}},"id":"1434482843301535"},{"name":"AIMS
+        Research Center - \u4eba\u5de5\u667a\u6167\u88fd\u9020\u7cfb\u7d71\u7814\u7a76\u4e2d\u5fc3","checkins":26,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/28577181_1953108151374567_9123133884451420922_n.png?_nc_cat=109&oh=add37f8722cee27e59a340d32004a7fc&oe=5C5AF22F","width":50}},"id":"1953115748040474"},{"name":"Hsinchu
+        Seaport\"Nanliao\".....","checkins":6186,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/16265668_605879779612131_888332945995538984_n.jpg?_nc_cat=110&oh=e65528743a4ac08e5aa58d7cc65cddf6&oe=5C53DAB5","width":50}},"id":"192215407496264"},{"name":"\u83e0\u863f\u7684\u6d77\u70d8\u7119\u574a\uff0d\u7af9\u5317\u5e97","checkins":46,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c1.0.50.50\/p50x50\/1743448_852094191470918_1360514489_n.jpg?_nc_cat=101&oh=55785b223ecd571abd4e464971dd2b04&oe=5C41A45A","width":50}},"id":"699950533351952"},{"name":"Cow
+        seafood \u70e4\u5e2b\u5085","checkins":347,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/24296377_1949999755237978_544438969422720700_n.jpg?_nc_cat=103&oh=6e99e7f9b025a0ba78c6c5929bf39240&oe=5C44888E","width":50}},"id":"1946372988933988"}]}'
+      read: true
+      uri: 
+      decode_content: true
+      socket: 
+      body_exist: true
+  response: *2
+  body: '{"data":[{"name":"Sean Twinkle","checkins":149,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/39390215_1855474711200017_2972631691165696000_n.png?_nc_cat=107&oh=b1ea376e7ecff7e6def073d4335d139b&oe=5C14AEF4","width":50}},"id":"861058253975006"},{"name":"Sean&Carrie
+    \u5410\u53f8\u76d2\u5b50","checkins":99,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/31723285_1945146995519405_8400778275164520448_n.jpg?_nc_cat=105&oh=0136643424d3d3359237063f90c94432&oe=5C543269","width":50}},"id":"1938553146178790"},{"name":"Sean
+    & Kit''s Wedding","checkins":3,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/30653086_234868160405498_8150114414582824960_n.png?_nc_cat=108&oh=303bd390eda74e181d991a930b56f8b4&oe=5C4CF8F1","width":50}},"id":"234880623737585"},{"name":"Seasaw","checkins":126,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"138103329650118"},{"name":"\u6d77\u5df7\u6d77\u9bae\u71d2\u7269
+    seafood","checkins":462,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/13265925_1031757830225393_4907566688689921257_n.jpg?_nc_cat=103&oh=f7ca1092e41adcc12941099785fd7b87&oe=5C4F4EBD","width":50}},"id":"1000781196656390"},{"name":"Seattle\u54c1\u670d\u98fe","checkins":15,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"538996762814513"},{"name":"\u6d77\u54e1\u97f3\u6a02Pub
+    (Sea Man)","checkins":0,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c106.23.289.289\/s50x50\/381317_483456115006984_872895755_n.jpg?_nc_cat=110&oh=158711d8a2cfe862ac4ca6ada002031a&oe=5C16B0BC","width":50}},"id":"1027198997299357"},{"name":"\u6d77\u9dd7\u2027K\u4eba\u8072\u6a02\u5718
+    Seagull-K Vocal Band","checkins":2,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c3.0.50.50\/p50x50\/226677_10151932327574550_138137865_n.png?_nc_cat=110&oh=ed38439e567903c92a1715ff3d7815cf&oe=5C150741","width":50}},"id":"10155419382064550"},{"name":"\u3010\u65e5\u97d3\u5718\u8cfc\u9023\u7dda\u3011Seattle\u5973\u88dd\u7cbe\u54c1-\u95dc\u65b0\u5e97","checkins":45,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/21078599_1421536804596139_992851021369981916_n.jpg?_nc_cat=102&oh=e52c94908538e8230e8e398e08b99c8f&oe=5C46C863","width":50}},"id":"1434482843301535"},{"name":"AIMS
+    Research Center - \u4eba\u5de5\u667a\u6167\u88fd\u9020\u7cfb\u7d71\u7814\u7a76\u4e2d\u5fc3","checkins":26,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/28577181_1953108151374567_9123133884451420922_n.png?_nc_cat=109&oh=add37f8722cee27e59a340d32004a7fc&oe=5C5AF22F","width":50}},"id":"1953115748040474"},{"name":"Hsinchu
+    Seaport\"Nanliao\".....","checkins":6186,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/16265668_605879779612131_888332945995538984_n.jpg?_nc_cat=110&oh=e65528743a4ac08e5aa58d7cc65cddf6&oe=5C53DAB5","width":50}},"id":"192215407496264"},{"name":"\u83e0\u863f\u7684\u6d77\u70d8\u7119\u574a\uff0d\u7af9\u5317\u5e97","checkins":46,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c1.0.50.50\/p50x50\/1743448_852094191470918_1360514489_n.jpg?_nc_cat=101&oh=55785b223ecd571abd4e464971dd2b04&oe=5C41A45A","width":50}},"id":"699950533351952"},{"name":"Cow
+    seafood \u70e4\u5e2b\u5085","checkins":347,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/24296377_1949999755237978_544438969422720700_n.jpg?_nc_cat=103&oh=6e99e7f9b025a0ba78c6c5929bf39240&oe=5C44888E","width":50}},"id":"1946372988933988"}]}'
+  parsed_block: !ruby/object:Proc {}
+  headers: !ruby/object:HTTParty::Response::Headers
+    header: &3
+      etag:
+      - '"592338fdce87a5699e664c3a583c136446d7715c"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      content-type:
+      - text/javascript; charset=UTF-8
+      facebook-api-version:
+      - v3.1
+      x-fb-trace-id:
+      - D8WY+bKzhIT
+      x-fb-rev:
+      - '4418184'
+      x-app-usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=15552000; preload
+      access-control-allow-origin:
+      - "*"
+      vary:
+      - Accept-Encoding
+      x-fb-debug:
+      - "/ESdAdEkEhETgGsDAVmbmhjbfkLY68FDrVQVi5qS2f0FMvVNZ4YeeWRPJImtCH91J0rYCmgfMpo2QBactZLCpQ=="
+      date:
+      - Sat, 13 Oct 2018 05:16:20 GMT
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+    delegate_sd_obj: *3
+  parsed_response: '{"data":[{"name":"Sean Twinkle","checkins":149,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/39390215_1855474711200017_2972631691165696000_n.png?_nc_cat=107&oh=b1ea376e7ecff7e6def073d4335d139b&oe=5C14AEF4","width":50}},"id":"861058253975006"},{"name":"Sean&Carrie
+    \u5410\u53f8\u76d2\u5b50","checkins":99,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/31723285_1945146995519405_8400778275164520448_n.jpg?_nc_cat=105&oh=0136643424d3d3359237063f90c94432&oe=5C543269","width":50}},"id":"1938553146178790"},{"name":"Sean
+    & Kit''s Wedding","checkins":3,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/30653086_234868160405498_8150114414582824960_n.png?_nc_cat=108&oh=303bd390eda74e181d991a930b56f8b4&oe=5C4CF8F1","width":50}},"id":"234880623737585"},{"name":"Seasaw","checkins":126,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"138103329650118"},{"name":"\u6d77\u5df7\u6d77\u9bae\u71d2\u7269
+    seafood","checkins":462,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/13265925_1031757830225393_4907566688689921257_n.jpg?_nc_cat=103&oh=f7ca1092e41adcc12941099785fd7b87&oe=5C4F4EBD","width":50}},"id":"1000781196656390"},{"name":"Seattle\u54c1\u670d\u98fe","checkins":15,"picture":{"data":{"height":50,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/418333_10149999285994467_1920585607_n.png?_nc_cat=1&oh=2a76f6513317cfe5b6aabe1e286c144d&oe=5C5BA504","width":50}},"id":"538996762814513"},{"name":"\u6d77\u54e1\u97f3\u6a02Pub
+    (Sea Man)","checkins":0,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c106.23.289.289\/s50x50\/381317_483456115006984_872895755_n.jpg?_nc_cat=110&oh=158711d8a2cfe862ac4ca6ada002031a&oe=5C16B0BC","width":50}},"id":"1027198997299357"},{"name":"\u6d77\u9dd7\u2027K\u4eba\u8072\u6a02\u5718
+    Seagull-K Vocal Band","checkins":2,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c3.0.50.50\/p50x50\/226677_10151932327574550_138137865_n.png?_nc_cat=110&oh=ed38439e567903c92a1715ff3d7815cf&oe=5C150741","width":50}},"id":"10155419382064550"},{"name":"\u3010\u65e5\u97d3\u5718\u8cfc\u9023\u7dda\u3011Seattle\u5973\u88dd\u7cbe\u54c1-\u95dc\u65b0\u5e97","checkins":45,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/21078599_1421536804596139_992851021369981916_n.jpg?_nc_cat=102&oh=e52c94908538e8230e8e398e08b99c8f&oe=5C46C863","width":50}},"id":"1434482843301535"},{"name":"AIMS
+    Research Center - \u4eba\u5de5\u667a\u6167\u88fd\u9020\u7cfb\u7d71\u7814\u7a76\u4e2d\u5fc3","checkins":26,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/28577181_1953108151374567_9123133884451420922_n.png?_nc_cat=109&oh=add37f8722cee27e59a340d32004a7fc&oe=5C5AF22F","width":50}},"id":"1953115748040474"},{"name":"Hsinchu
+    Seaport\"Nanliao\".....","checkins":6186,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/16265668_605879779612131_888332945995538984_n.jpg?_nc_cat=110&oh=e65528743a4ac08e5aa58d7cc65cddf6&oe=5C53DAB5","width":50}},"id":"192215407496264"},{"name":"\u83e0\u863f\u7684\u6d77\u70d8\u7119\u574a\uff0d\u7af9\u5317\u5e97","checkins":46,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c1.0.50.50\/p50x50\/1743448_852094191470918_1360514489_n.jpg?_nc_cat=101&oh=55785b223ecd571abd4e464971dd2b04&oe=5C41A45A","width":50}},"id":"699950533351952"},{"name":"Cow
+    seafood \u70e4\u5e2b\u5085","checkins":347,"picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p50x50\/24296377_1949999755237978_544438969422720700_n.jpg?_nc_cat=103&oh=6e99e7f9b025a0ba78c6c5929bf39240&oe=5C44888E","width":50}},"id":"1946372988933988"}]}'
+? https://graph.facebook.com/v3.1/search?type=place&fields=name,checkins,picture&q=error&center=24.7943758,120.9715205&distance=10000
+: data: []
