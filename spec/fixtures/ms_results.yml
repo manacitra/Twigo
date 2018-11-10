@@ -1,5 +1,26 @@
 ---
 Id: 2118428193
+Title: chord a scalable peer to peer lookup protocol for internet applications
+Author:
+- ion stoica
+- robert tappan morris
+- david libennowell
+- david r karger
+- m frans kaashoek
+- frank dabek
+- hari balakrishnan
 Year: 2003
 Date: '2003-02-01'
+Field:
+- baton overlay
+- scalable source routing
+- koorde
+- key based routing
+- content addressable network
+- chord
+- distributed hash table
+- pastry
+- computer network
+- distributed computing
+- computer science
 DOI: 10.1109/TNET.2002.808407

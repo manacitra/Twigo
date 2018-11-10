@@ -6,6 +6,8 @@ require 'json'
 
 config = YAML.safe_load(File.read('config/secrets.yml'))
 token = config['MS_TOKEN']
+puts "the token is" . token
+# token = "d74bd5a4fdb74fc59d46175f39b220a3"
 
 def microsoft_api_url(keywords, count)  
   uri = URI('https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate')
@@ -15,7 +17,7 @@ def microsoft_api_url(keywords, count)
     'model' => 'latest',
     'count' => "#{count}",
     'offset' => '0',
-    'attributes' => 'Ti,AA.AuN,Y,D,RId,E'
+    'attributes' => 'Ti,AA.AuN,Y,D,F.FN,E'
   })
 
   if uri.query && uri.query.length > 0
@@ -43,7 +45,7 @@ microsoft_response = {}
 microsoft_results = {}
 
 ## happy requests
-data_url = microsoft_api_url('internet', 1)
+data_url = microsoft_api_url('internet', 10)
 microsoft_response['data_url'] = call_microsoft_url(data_url, token)
 data = JSON.parse(microsoft_response['data_url'].body)
 entity_data = data['entities']
@@ -51,11 +53,28 @@ entity_data = data['entities']
 microsoft_results['Id'] = entity_data[0]['Id']
 # should be 2118428193
 
+microsoft_results['Title'] = entity_data[0]['Ti']
+# should be 'chord a scalable peer to peer lookup protocol for internet applications'
+
+author_array = []
+entity_data[0]['AA'].map { |author|
+  author_array.push(author['AuN'])
+}
+microsoft_results['Author'] = author_array
+# array size should be 6
+
 microsoft_results['Year'] = entity_data[0]['Y']
 # should be 2003
 
 microsoft_results['Date'] = entity_data[0]['D']
 # should be 2003-02-01
+
+field_array = []
+entity_data[0]['F'].map { |field|
+  field_array.push(field['FN'])
+}
+microsoft_results['Field'] = field_array
+# array size should be 11
 
 extend_data = JSON.parse(entity_data[0]['E'])
 microsoft_results['DOI'] = extend_data['DOI']

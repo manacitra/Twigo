@@ -1,11 +1,12 @@
 require 'roda'
 require 'slim'
 
-module MSAcademic
+module RefEm
   # Web App
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, css: 'style.css', path: 'app/views/assets/'
+    plugin :assets, path: 'app/views/assets',
+                    css: 'style.css'#, js: 'table_row.js'
     plugin :halt
 
     route do |routing|
@@ -13,7 +14,8 @@ module MSAcademic
 
       # GET / 
       routing.root do
-        view 'home'
+        papers = Repository::For.klass(Entity::Paper).all
+        view 'home', locals: { papers: papers }
       end
 
       routing.on 'find_paper' do
@@ -27,18 +29,25 @@ module MSAcademic
             # query format: keyword/paper count
             routing.halt 400 unless (query_param.split('/')[-1].to_i <= 10) &&
                                     (query_param.split('/').count == 2)
-            keyword, paper_count = query_param.split('/')
+            keyword, count = query_param.split('/')
 
-            routing.redirect "find_paper/#{keyword}/#{paper_count}"
+            # Get paper from ms
+            paper = MSPaper::PaperMapper
+              .new(App.config.MS_TOKEN)
+              .find(keyword, count)
+            # Add paper to database
+            Repository::For.entity(paper).create(paper)
+            # Redirect viewer to find_ page
+            routing.redirect "find_paper/#{keyword}/#{count}"
           end
         end
 
-        routing.on String, String do |keyword, paper_count|
+        routing.on String, String do |keyword, count|
           # GET /find_paper/keyword/paper_count
           routing.get do
-            paper_title = MSAcademic::MSPaper::PaperMapper
+            paper_title = RefEm::MSPaper::PaperMapper
               .new(MS_TOKEN)
-              .find(keyword, paper_count)
+              .find(keyword, count)
             #puts("!!!! #{paper_title.paper_doi}")
 
             view 'find_paper', locals: { find_paper: paper_title }

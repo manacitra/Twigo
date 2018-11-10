@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 <AppName>
 <p>An application that helps researcher to find back to back literature from a paper.<br>
 Given a paper information, we use data that we collected from API to find the best papers that it cites <b>(best reference paper)</b>, and the best papers that cite it<b> (best citation paper)</b>. We then create a before/after <b>citation map of a paper</b>. <br>
 The best papers citation and reference policy will be part of our business logic (under development), probably will be based on the weight of <b>citation number</b> and the <b>paper venue</b>.
   </p>
+=======
+<h1>RefEm</h1>
+Application that helps researcher to find back to back literature from a paper
+
+>>>>>>> 9794e1a3a5f0abbce917e1c53c1ca3cd9c56f9d5
 <h2>Overview</h2>
 
 In this app we use 2 APIs: 
