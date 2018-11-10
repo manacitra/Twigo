@@ -10,7 +10,7 @@ require 'yaml'
 require 'minitest/autorun'
 require 'minitest/rg'
 
-require 'pry' # for degbugging
+require 'pry' # for debugging
 
 require_relative '../init.rb'
 

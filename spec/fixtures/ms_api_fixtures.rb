@@ -5,8 +5,7 @@ require 'yaml'
 require 'json'
 
 config = YAML.safe_load(File.read('config/secrets.yml'))
-token = config['MS_TOKEN']
-puts "the token is" . token
+token = config['test']['MS_TOKEN']
 # token = "d74bd5a4fdb74fc59d46175f39b220a3"
 
 def microsoft_api_url(keywords, count)  
@@ -17,7 +16,7 @@ def microsoft_api_url(keywords, count)
     'model' => 'latest',
     'count' => "#{count}",
     'offset' => '0',
-    'attributes' => 'Ti,AA.AuN,Y,D,F.FN,E'
+    'attributes' => 'Ti,AA.AuN,Y,D,F.FN,E,RId'
   })
 
   if uri.query && uri.query.length > 0
@@ -76,8 +75,23 @@ entity_data[0]['F'].map { |field|
 microsoft_results['Field'] = field_array
 # array size should be 11
 
+# puts entity_data[0]['RId']
+reference_array = []
+entity_data[0]['RId'].map { |rid|
+  reference_array.push(rid)
+}
+microsoft_results['References'] = reference_array
+
 extend_data = JSON.parse(entity_data[0]['E'])
 microsoft_results['DOI'] = extend_data['DOI']
+microsoft_results['VenueFull'] = extend_data['VFN']
+microsoft_results['VenueShort'] = extend_data['VSN']
+microsoft_results['Volume'] = extend_data['V']
+microsoft_results['JournalName'] = extend_data['BV']
+microsoft_results['JournalAbr'] = extend_data['PB']
+microsoft_results['Issue'] = extend_data['I']
+microsoft_results['FirstPage'] = extend_data['FP']
+microsoft_results['LastPage'] = extend_data['LP']
 
 ## bad request
 bad_data_url = microsoft_api_url('internet', -5)
