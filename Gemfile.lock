@@ -156,8 +156,8 @@ PLATFORMS
 DEPENDENCIES
   database_cleaner
   debase
-  dry-struct (~> 0.5)
-  dry-types (~> 0.5)
+  dry-struct
+  dry-types
   econfig (~> 2.1)
   flog
   hirb
@@ -183,4 +183,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.6
+   1.17.1

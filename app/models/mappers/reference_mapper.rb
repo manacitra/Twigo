@@ -1,45 +1,51 @@
 # frozen_string_literal: true
 require 'json'
 
-require_relative 'reference_mapper.rb'
-
 module RefEm
   # Provides access to microsoft data
   module MSPaper
     # Data Mapper: microsoft paper -> paper
-    class PaperMapper
+    class ReferenceMapper
       def initialize(ms_token, gateway_class = MSPaper::Api)
         @token = ms_token
         @gateway_class = gateway_class
         @gateway = @gateway_class.new(@token)
       end
 
-      def find(keywords, count)
-        @gateway.paper_data(keywords, count).map { |data|
-          puts "#kelas dari data ini adalah:"
-          puts data.class
-          build_entity(data)
+      def find_several(references)
+        
+        # @gateway.reference_data(2227895079).map { |data|
+        #   build_entity(data)
+        # }
+        ar = []
+        references.map { |ref| 
+          sleep(10)
+          puts "reference:"
+          puts ref
+          @gateway.reference_data(ref).map { |data|
+            ar.push(ReferenceMapper.build_entity(data))
+          }
         }
+        ar
+        
+        # @gateway.reference_data(references).map { |data|
+        #   ReferenceMapper.build_entity(data)
+        # }
       end
 
-      def build_entity(data)
-        DataMapper.new(data, @token, @gateway_class).build_entity
+      def self.build_entity(data)
+        DataMapper.new(data).build_entity
       end
       
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(data, token, gateway_class)
+        def initialize(data)
           @data = data
-          # puts "------- this is data--------"
-          # puts @data["RId"]
-          # puts "----------------------------"
-          @reference_mapper = ReferenceMapper.new(
-            token, gateway_class
-          )          
+          puts @data["Id"]
         end
 
         def build_entity
-          RefEm::Entity::Paper.new(
+          RefEm::Entity::Reference.new(
             id: id,
             title: title,
             author: author,
@@ -82,7 +88,7 @@ module RefEm
         end
 
         def references
-          @reference_mapper.find_several(@data['RId'])
+          @data['RId']
         end
         
         def field

@@ -1,13 +1,12 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 require 'dry-struct'
-require_relative '../mappers/paper_mapper.rb'
-require_relative 'reference.rb'
+require_relative '../mappers/reference_mapper.rb'
 
 module RefEm
   module Entity
     # Domain entity for paper
-    class Paper < Dry::Struct
+    class Reference < Dry::Struct
       include Dry::Types.module
 
       attribute :id,           Strict::Integer
@@ -15,9 +14,7 @@ module RefEm
       attribute :author,       Strict::Array.of(String)
       attribute :year,         Strict::Integer
       attribute :date,         Strict::String
-      # attribute :references, Strict::Array.of(String)      
-      # attribute :references, Strict::Array.of(Reference)
-      attribute :references,   Strict::Array.of(Reference).optional
+      attribute :references,   Strict::Array.of(String).optional
       attribute :field,        Strict::Array.of(String)
       attribute :doi,          Strict::String.optional
       attribute :venue_full,   Strict::String.optional

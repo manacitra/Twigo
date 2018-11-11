@@ -10,8 +10,8 @@ gem 'roda', '~> 3.8'
 gem 'slim', '~> 3.0'
 
 # Entity gems
-gem 'dry-struct', '~> 0.5'
-gem 'dry-types', '~> 0.5'
+gem 'dry-struct'
+gem 'dry-types'
 
 # Networking gems
 gem "httparty"
