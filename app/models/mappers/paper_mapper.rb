@@ -16,8 +16,8 @@ module RefEm
 
       def find(keywords, count)
         @gateway.paper_data(keywords, count).map { |data|
-          puts "#kelas dari data ini adalah:"
-          puts data.class
+          # puts "#kelas dari data ini adalah:"
+          # puts data.class
           build_entity(data)
         }
       end

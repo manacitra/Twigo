@@ -19,9 +19,9 @@ module RefEm
         # }
         ar = []
         references.map { |ref| 
-          sleep(10)
-          puts "reference:"
-          puts ref
+          sleep(5)
+          # puts "reference:"
+          # puts ref
           @gateway.reference_data(ref).map { |data|
             ar.push(ReferenceMapper.build_entity(data))
           }
@@ -41,7 +41,7 @@ module RefEm
       class DataMapper
         def initialize(data)
           @data = data
-          puts @data["Id"]
+          # puts @data["Id"]
         end
 
         def build_entity

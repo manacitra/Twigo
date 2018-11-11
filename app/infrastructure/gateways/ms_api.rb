@@ -50,15 +50,15 @@ module RefEm
       end
 
       def reference_data(ref_id)
-        puts "!-----------------"
-        puts ref_id
+        # puts "!-----------------"
+        # puts ref_id
         paper_response = Request.new(@ms_token)
                                 .reference_info(ref_id)
         # process data 
         res_data = JSON.parse(paper_response.body)
         res_data['entities'].map { |data|
-          puts "response data:"
-          puts data
+          # puts "response data:"
+          # puts data
           author_array = []
           field_array = []	
           reference_array = []	
