@@ -85,12 +85,12 @@ module RefEm
 
         def reference_info(references)
           ref_array = concat_references(references)
+          puts ref_array
           uri = URI('https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate')
           query = URI.encode_www_form({
             # Request parameters
             'expr' => "Or(#{ref_array})",
             'model' => 'latest',
-            'count' => '1',
             'offset' => '0',
             'attributes' => 'Id,Ti,AA.AuN,Y,D,F.FN,E,RId'
           })
