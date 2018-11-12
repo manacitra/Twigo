@@ -13,24 +13,9 @@ module RefEm
       end
 
       def find_several(references)
-        
-        # @gateway.reference_data(2227895079).map { |data|
-        #   build_entity(data)
-        # }
-        ar = []
-        references.map { |ref| 
-          sleep(5)
-          # puts "reference:"
-          # puts ref
-          @gateway.reference_data(ref).map { |data|
-            ar.push(ReferenceMapper.build_entity(data))
-          }
+        @gateway.reference_data(references).map { |data|
+          ReferenceMapper.build_entity(data)
         }
-        ar
-        
-        # @gateway.reference_data(references).map { |data|
-        #   ReferenceMapper.build_entity(data)
-        # }
       end
 
       def self.build_entity(data)
@@ -41,7 +26,6 @@ module RefEm
       class DataMapper
         def initialize(data)
           @data = data
-          # puts @data["Id"]
         end
 
         def build_entity

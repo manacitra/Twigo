@@ -75,7 +75,6 @@ entity_data[0]['F'].map { |field|
 microsoft_results['Field'] = field_array
 # array size should be 11
 
-# puts entity_data[0]['RId']
 reference_array = []
 entity_data[0]['RId'].map { |rid|
   reference_array.push(rid)

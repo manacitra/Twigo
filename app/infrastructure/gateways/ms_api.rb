@@ -19,46 +19,17 @@ module RefEm
       def paper_data(keywords, count)
         paper_response = Request.new(@ms_token)
                                 .paper_info(keywords, count)
-        # process data 
-        res_data = JSON.parse(paper_response.body)
-        # puts res_data
-        res_data['entities'].map { |data|
-          # puts data
-          author_array = []
-          field_array = []	
-          reference_array = []	
-          data['AA'].map { |author|
-            author_array.push(author['AuN'])
-          }
-          data['AA'] = author_array
-
-          data['F'].map { |field|
-            field_array.push(field['FN'])
-          }
-          data['F'] = field_array
-
-          if (!data['RId'].nil?)
-            data['RId'].map { |rid|
-              reference_array.push(rid.to_s)
-            }
-          end
-          data['RId'] = reference_array
-
-          data['E'] = JSON.parse(data['E'])
-        }
-        res_data['entities']
+        create_new_data_format(JSON.parse(paper_response.body))
       end
 
-      def reference_data(ref_id)
-        # puts "!-----------------"
-        # puts ref_id
+      def reference_data(references)
         paper_response = Request.new(@ms_token)
-                                .reference_info(ref_id)
-        # process data 
-        res_data = JSON.parse(paper_response.body)
+                                .reference_info(references)
+        create_new_data_format(JSON.parse(paper_response.body))
+      end
+
+      def create_new_data_format(res_data)
         res_data['entities'].map { |data|
-          # puts "response data:"
-          # puts data
           author_array = []
           field_array = []	
           reference_array = []	
@@ -81,8 +52,8 @@ module RefEm
 
           data['E'] = JSON.parse(data['E'])
         }
-        res_data['entities']
-      end      
+        res_data['entities']        
+      end        
 
       # send out HTTP requests to Github
       class Request
@@ -112,11 +83,12 @@ module RefEm
           get(uri)
         end
 
-        def reference_info(ref_id)
+        def reference_info(references)
+          ref_array = concat_references(references)
           uri = URI('https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate')
           query = URI.encode_www_form({
             # Request parameters
-            'expr' => "Id = #{ref_id}",
+            'expr' => "Or(#{ref_array})",
             'model' => 'latest',
             'count' => '1',
             'offset' => '0',
@@ -128,10 +100,17 @@ module RefEm
           else
             uri.query = query
           end
-          # puts uri
           get(uri)
         end
 
+        def concat_references(references)
+          ref_array = ""
+          references.map { |data|
+            ref_array = ("Id=" + data) if ref_array == ""
+            ref_array = (ref_array + ", Id=" + data) if ref_array != ""
+          }
+          ref_array
+        end
         def get(uri)
           http_request = Net::HTTP::Get.new(uri.request_uri)
           # Request headers
