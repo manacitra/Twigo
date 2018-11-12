@@ -6,6 +6,7 @@ module RefEm
     class FromSS < Dry::Struct
       include Dry::Types.module
 
+      attribute :origin_id,                    Strict::String.optional
       attribute :citation_velocity,            Strict::Integer
       attribute :citation_dois,                Strict::Array.of(String) # sometimes doi is null
       attribute :citation_titles,              Strict::Array.of(String)

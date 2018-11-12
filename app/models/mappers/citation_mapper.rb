@@ -28,37 +28,23 @@ module RefEm
         end
 
         def build_entity
-          RefEm::Entity::Paper.new(
-            id: nil,
+          RefEm::Entity::FromSS.new(
             origin_id: origin_id,
             citation_velocity: citation_velocity,
             citation_dois: citation_dois,
             citation_titles: citation_titles,
             influential_citation_count: influential_citation_count,
-            venue: venue
+            venue: venue,
+            focus_doi: focus_doi
           )
 
           #paper id from paper table as foreign key
         end
-        
+
         private
 
-        def id; end
-        def year; end
-        def date; end
-        def field; end
-        def origin_id; end
-
-        def title
-          @data['title']
-        end
-
-        def author;
-          # authors = ''
-          # @data['authors'].each { |author| 
-          #   authors += "#{author['name']};"
-          # }
-          # authors
+        def origin_id
+          @data['paperId']
         end
 
         def citation_velocity

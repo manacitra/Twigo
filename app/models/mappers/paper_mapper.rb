@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
-require_relative 'ss_mapper'
+require_relative 'citation_mapper'
 
 module RefEm
   # Provides access to microsoft data
