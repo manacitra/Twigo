@@ -18,6 +18,8 @@ module RefEm
           input[:local_paper] = paper
         else
           input[:remote_paper] = paper_from_microsoft(input)[0]
+          puts "erewoiuhr: #{input[:remote_paper].nil?}"
+          raise 'Could not find papers by the ID' if input[:remote_paper].nil?
         end
 
         Success(input)

@@ -30,27 +30,32 @@
           type='submit' id='paper_search-submit' class='submit'
           value='submit' class="btn btn-success"
         } Find Paper
-    .row
-      .col-md-12.blank-row
-    - if papers.any?
-      table class="table table-hover" id="papers_table"
-        thead
-          tr
-            th Index
-            th Title
-            th Authors
-        tbody
-          - papers.each do |paper|
-            tr class="table-row paper_row" data-href=paper.graph_link id="#{paper.index_str}.row"
-              td id='td_index'
-                span class="paper_index" id="#{paper.index_str}.index" #{paper.index}
-              td id='td_title'
-                span class="paper_title" id="#{paper.index_str}.title"
-                  a href=paper.graph_link id="#{paper.index_str}.link"
-                    = paper.title
-              td id='td_author'
-                span clss="paper_author"  id="#{paper.index_str}.author"
-                  = paper.author
-                  
-  
+  .row
+    .col-md-12.blank-row
+  - if papers.any?
+    table class="table table-hover" id="papers_table"
+      thead
+        tr
+          th Index
+          th Title
+          th Authors
+          th 
+      tbody
+        - papers.each do |paper|
+          tr class="table-row paper_row" data-href=paper.graph_link id="#{paper.index_str}.row"
+            td id='td_index'
+              span class="paper_index" id="#{paper.index_str}.index" #{paper.index}
+            td id='td_title'
+              span class="paper_title" id="#{paper.index_str}.title"
+                a href=paper.graph_link id="#{paper.index_str}.link"
+                  = paper.title
+            td id='td_author'
+              span clss="paper_author"  id="#{paper.index_str}.author"
+                = paper.author
+            td id='delete_paper'
+              form role='form' method='post' action=paper.graph_link
+                input type='hidden' name='_method' value='delete'
+                button type="submit" class="btn btn-lg btn-link" id="#{paper.index_str}.delete"
+                  i class="fas fa-trash-alt"
+
       

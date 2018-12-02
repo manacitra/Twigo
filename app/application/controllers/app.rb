@@ -22,7 +22,19 @@ module RefEm
 
       # GET /
       routing.root do
-        papers = Repository::For.klass(Entity::Paper).all
+        
+        session[:watching] ||= []
+        
+        result = Service::ListPapers.new.call(session[:watching])
+
+        if result.failure?
+          flash[:error] = result.failure
+          view 'home', locals: { papers: [] }
+        end
+
+        papers = result.value!
+
+        session[:watching] = papers.map(&:origin_id)
 
         viewable_papers = Views::PaperList.new(papers)
         view 'home', locals: { papers: viewable_papers }
@@ -56,7 +68,7 @@ module RefEm
         end
 
         routing.on String, String do |searchType, keyword|
-
+          # POST /find_paper/searchtype/keyword
           keywords = Forms::Keyword.call(
             keyword: keyword,
             searchType: searchType
@@ -76,11 +88,21 @@ module RefEm
         end
       end
       routing.on 'paper_content' do
+        
+        
         routing.on String do |id|
-          routing.get do
+          # DELETE /paper_content/paper_id
+          routing.delete do
+            session[:watching].delete(id.to_i)
 
+            routing.redirect '/'
+          end
+
+          routing.get do
+            # GET /paper_content/paper_id
             paper = Service::ShowPaperContent.new.call(id: id)
 
+            puts "paper failure: #{paper.failure?}"
             if paper.failure?
               flash[:error] = paper.failure
               routing.redirect '/'
@@ -88,13 +110,14 @@ module RefEm
 
             # get main paper object value
             paper = paper.value!
+            session[:watching].insert(0, paper.origin_id).uniq!
 
             viewable_paper = Views::Paper.new(paper)
 
             view 'paper_content', locals: { paper: viewable_paper }
           end
         end
-        # GET /find_paper/
+        # GET /paper_content/
         routing.get do
           flash[:error] = 'Please enter the correct url'
           routing.redirect '/'

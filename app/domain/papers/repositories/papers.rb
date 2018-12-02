@@ -13,6 +13,12 @@ module RefEm
         rebuild_entity(db_paper)
       end
 
+      def self.find_papers(id_list)
+        id_list.map do |id|
+          find_paper_content(id)
+        end.compact
+      end
+
       def self.find(entity)
         find_id(entity.origin_id)
       end

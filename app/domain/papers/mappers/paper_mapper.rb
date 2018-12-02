@@ -34,6 +34,11 @@ module RefEm
         }
       end
 
+      def find_main_paper(id)
+        show_detail = true
+        build_entity(data, show_detail)
+      end
+
       def build_entity(data, show_detail)
         DataMapper.new(data, @token, @gateway_class, show_detail).build_entity
       end
