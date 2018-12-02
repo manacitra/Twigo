@@ -28,9 +28,15 @@ module RefEm
         to_hash.reject { |key, _| [:id, :references, :citations].include? key }
       end
 
-      # def ref_to_array
-      #   reference_array = references.split(";")
-      # end
+      # change references to top five references
+      def ref_to_top_ref(references_list)
+        references = references_list
+      end
+
+      #change citations to top five citations
+      def cit_to_top_cit(citations_list)
+        citations = citations_list
+      end
     end
   end
 end

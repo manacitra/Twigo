@@ -228,7 +228,7 @@ PLATFORMS
 DEPENDENCIES
   database_cleaner
   debase
-  dry-monads (~> 0.4.0)
+  dry-monads
   dry-struct (~> 0.5)
   dry-transaction
   dry-types (~> 0.5)

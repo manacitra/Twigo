@@ -14,12 +14,11 @@ module RefEm
 
       def references_rank
         reference_score_list = []
-        puts "venue class: #{@venue_score.class}"
         @paper.references.each { |reference|
-        venue_weight = @venue_score.get_venue_weight(reference.journal_name)
-        reference_score = paper_score(reference, venue_weight)
-        item = [reference, reference_score]
-        reference_score_list.push(item)
+          venue_weight = @venue_score.get_venue_weight(reference.journal_name)
+          reference_score = paper_score(reference, venue_weight)
+          item = [reference, reference_score]
+          reference_score_list.push(item)
         }
         paper_rank(reference_score_list)
       end
@@ -27,10 +26,8 @@ module RefEm
       def citations_rank
         citation_score_list = []
         @paper.citations.each { |citation|
-        venue_weight = @venue_score.get_venue_weight(citation.venue)
-        citation_score = paper_score(citation, citation.venue)
-        item = [citation, citation_score]
-        citation_score_list.push(item)
+          item = [citation, citation.influential_citation_count]
+          citation_score_list.push(item)
         }
         paper_rank(citation_score_list)
       end

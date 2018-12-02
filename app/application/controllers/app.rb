@@ -102,7 +102,6 @@ module RefEm
             # GET /paper_content/paper_id
             paper = Service::ShowPaperContent.new.call(id: id)
 
-            puts "paper failure: #{paper.failure?}"
             if paper.failure?
               flash[:error] = paper.failure
               routing.redirect '/'

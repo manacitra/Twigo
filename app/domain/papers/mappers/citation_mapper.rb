@@ -41,10 +41,11 @@ module RefEm
             year: year,
             doi: doi,
             venue: venue,
+            influential_citation_count: influential_citation_count
             # citation_velocity: citation_velocity,
             # citation_dois: citation_dois,
             # citation_titles: citation_titles,
-            # influential_citation_count: influential_citation_count
+            
           )
 
           #paper id from paper table as foreign key
@@ -80,6 +81,10 @@ module RefEm
 
         def venue
           @data['venue']
+        end
+
+        def influential_citation_count
+          @data['influentialCitationCount']
         end
 
         # def citation_velocity

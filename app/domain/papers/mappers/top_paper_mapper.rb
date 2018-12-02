@@ -14,10 +14,11 @@ module RefEm
 
       def top_papers
         references_list = top_references
-        # citation_list = top_citations
-        puts "reference list: #{references_list}"
+        citations_list = top_citations
+        # change references of main paper to top five references
         @paper.ref_to_top_ref(references_list)
-        @paper
+        # change citations of main paper to top five citations
+        @paper.cit_to_top_cit(citations_list)
       end
 
       def top_references
