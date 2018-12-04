@@ -19,6 +19,8 @@ module RefEm
         @paper.ref_to_top_ref(references_list)
         # change citations of main paper to top five citations
         @paper.cit_to_top_cit(citations_list)
+        
+        @paper
       end
 
       def top_references
