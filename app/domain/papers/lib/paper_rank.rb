@@ -12,7 +12,7 @@ module RefEm
         paper_list.sort { |x, y| y[1] <=> x[1] }
         top_five_papers = []
         for num in 0..4
-          top_five_papers.push(paper_list[num])
+          top_five_papers.push(paper_list[num][0])
         end
 
         top_five_papers

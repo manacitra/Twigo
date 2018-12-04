@@ -35,7 +35,7 @@ module RefEm
         end
         top_paper = MSPaper::TopPaperMapper.new(paper)
         paper = top_paper.top_papers
-        #top_citations = top_paper.top_citations
+
         if input[:local_paper].nil?
           input[:remote_paper] = paper
         else
