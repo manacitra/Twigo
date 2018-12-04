@@ -9,6 +9,7 @@ module RefEm
       include Dry::Transaction
 
       step :find_main_paper
+      step :calculate_top_paper
       step :store_paper
 
       private
@@ -18,7 +19,6 @@ module RefEm
           input[:local_paper] = paper
         else
           input[:remote_paper] = paper_from_microsoft(input)[0]
-          puts "erewoiuhr: #{input[:remote_paper].nil?}"
           raise 'Could not find papers by the ID' if input[:remote_paper].nil?
         end
 
@@ -26,6 +26,27 @@ module RefEm
       rescue StandardError => error
         Failure(error.to_s)
       end
+
+      def calculate_top_paper(input)
+        if input[:local_paper].nil?
+          paper = input[:remote_paper]
+        else
+          paper = input[:local_paper]
+        end
+        top_paper = MSPaper::TopPaperMapper.new(paper)
+        paper = top_paper.top_papers
+        #top_citations = top_paper.top_citations
+        if input[:local_paper].nil?
+          input[:remote_paper] = paper
+        else
+          input[:local_paper] = paper
+        end
+      
+        Success(input)
+        # rescue StandardError
+        #   raise 'Could not find papers by the ID'
+      end
+        
 
       def store_paper(input)
         paper =
