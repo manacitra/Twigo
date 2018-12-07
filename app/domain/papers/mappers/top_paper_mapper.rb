@@ -15,12 +15,18 @@ module RefEm
       def top_papers
         references_list = top_references
         citations_list = top_citations
-        # change references of main paper to top five references
-        @paper.ref_to_top_ref(references_list)
-        # change citations of main paper to top five citations
-        @paper.cit_to_top_cit(citations_list)
-        
-        @paper
+        paper_contain_top_ref_cit_hash = @paper.to_attr_hash
+        paper_contain_top_ref_cit_hash[:id] = nil
+
+        # create main paper contain top five references and citations
+        paper_contain_top_ref_cit = RefEm::Entity::Paper.new(
+            paper_contain_top_ref_cit_hash.merge(
+            references: references_list,
+            citations: citations_list
+          )
+        )
+
+        paper_contain_top_ref_cit
       end
 
       def top_references

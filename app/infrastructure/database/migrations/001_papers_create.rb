@@ -14,6 +14,7 @@ Sequel.migration do
       String    :date
       String    :field
       String    :doi, null: true
+      String    :link, null: true
 
       DateTime :created_at
       DateTime :updated_at

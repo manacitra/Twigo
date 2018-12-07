@@ -48,9 +48,6 @@ module RefEm
         def initialize(data, token, gateway_class, show_detail)
           @data = data
           @show_detail = show_detail
-          # puts "==============="
-          # puts data["Ti"]
-          # puts data["RId"]
           @reference_mapper = ReferenceMapper.new(
             token, gateway_class
           )
@@ -68,7 +65,8 @@ module RefEm
             field: field,
             doi: doi,
             references: references,
-            citations: citations
+            citations: citations,
+            link: link
           )
         end
 
@@ -117,6 +115,9 @@ module RefEm
           @data['E']['DOI']
         end
 
+        def link
+          "https://academic.microsoft.com/#/detail/#{@data['Id']}"
+        end
  
       end
     end

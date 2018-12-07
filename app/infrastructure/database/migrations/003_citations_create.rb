@@ -18,6 +18,7 @@ Sequel.migration do
 
       DateTime :created_at
       DateTime :updated_at
+      String   :link,            null: true
     end
   end
 end

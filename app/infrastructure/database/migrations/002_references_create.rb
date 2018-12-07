@@ -24,6 +24,7 @@ Sequel.migration do
       Integer   :first_page,      null: true
       Integer   :last_page,       null: true
       Integer   :citation_count,  null: true
+      String   :link,            null: true
 
       # attribute :references,  Strict::Array.member(Paper).optional
     end

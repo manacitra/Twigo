@@ -20,7 +20,6 @@ module Views
       citations = []
       for num in 0..4
         citations.push(@citations[num])
-        puts "citations: #{citations[num]}"
       end
       
       citations.each do |c|
