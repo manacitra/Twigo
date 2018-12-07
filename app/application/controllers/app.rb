@@ -30,11 +30,11 @@ module RefEm
 
         if result.failure?
           flash[:error] = result.failure
-          view 'home', locals: { papers: [] }
+          papers = []
+        else
+          papers = result.value!.papers
         end
-
-        papers = result.value!
-
+            
         session[:watching] = papers.map(&:origin_id)
 
         viewable_papers = Views::PaperList.new(papers)
@@ -101,15 +101,17 @@ module RefEm
 
           routing.get do
             # GET /paper_content/paper_id
-            paper = Service::ShowPaperContent.new.call(id: id)
+            result = Service::ShowPaperContent.new.call(id: id)
 
-            if paper.failure?
-              flash[:error] = paper.failure
-              routing.redirect '/'
+            if result.failure?
+              flash[:error] = result.failure
+              paper = []
+            else
+              paper = result.value!.paper
             end
 
+    
             # get main paper object value
-            paper = paper.value!
             session[:watching].insert(0, paper.origin_id).uniq!
 
             viewable_paper = Views::Paper.new(paper)

@@ -10,6 +10,7 @@ module RefEm
 
       step :validate_input
       step :find_paper
+      step :reify_papers
 
       private
 
@@ -26,29 +27,30 @@ module RefEm
 
       def find_paper(input)
         begin
-          input[:papers] = paper_from_microsoft(input)
-          unless input[:papers] == []
-            Success(input)
-          else
-            raise 'Could not find papers by the keyword'
-          end
-        rescue StandardError => error
-          Failure(error.to_s)
+          result = paper_from_microsoft(input)
+          result.success? ? Success(result.payload) : Failure(result.message)
+        rescue StandardError => e
+          puts e.inspect + '\n' + e.backtrace
+          Failure('Could not find papers by the keyword')
+        end
+      end
+
+      def reify_papers(paper_json)
+        begin
+          Representer::PaperList.new(OpenStruct.new)
+           .from_json(paper_json)
+           .yield_self { |papers| Success(papers)}
+          
+        rescue StandardError
+          Failure('Error in the papers -- please try again later')
         end
       end
 
       # following are support methods that other services could use
 
       def paper_from_microsoft(input)
-        MSPaper::PaperMapper
-          .new(App.config.MS_TOKEN)
-          .find_papers_by_keywords(input[:keyword], input[:searchType])
-      rescue StandardError
-        raise 'Could not find papers by the keyword'
-      end
-
-      def project_in_database(input)
-        Repository::For.klass(Entity::Paper)
+        Gateway::Api.new(RefEm::App.config)
+          .papers_list(input[:searchType], input[:keyword])
       end
     end
   end

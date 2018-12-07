@@ -9,71 +9,38 @@ module RefEm
       include Dry::Transaction
 
       step :find_main_paper
-      step :calculate_top_paper
-      step :store_paper
+      step :reify_paper
 
       private
 
       def find_main_paper(input)
-        if (paper = paper_in_database(input))
-          input[:local_paper] = paper
-        else
-          input[:remote_paper] = paper_from_microsoft(input)[0]
-          raise 'Could not find papers by the ID' if input[:remote_paper].nil?
-        end
 
-        Success(input)
-      rescue StandardError => error
-        Failure(error.to_s)
+        result = paper_from_microsoft(input)
+
+        result.success? ? Success(result.payload) : Failure(result.message)
+      rescue StandardError
+        Failure('Could not access our API')
       end
 
-      def calculate_top_paper(input)
-        if input[:local_paper].nil?
-          paper = input[:remote_paper]
-        else
-          paper = input[:local_paper]
+      def reify_paper(paper_json)
+        begin
+          Representer::TopPaper.new(OpenStruct.new)
+           .from_json(paper_json)
+           .yield_self { |papers| Success(papers)}
+          
+        rescue StandardError
+          Failure('Error in the paper -- please try again later')
         end
-        top_paper = MSPaper::TopPaperMapper.new(paper)
-        paper = top_paper.top_papers
-
-        if input[:local_paper].nil?
-          input[:remote_paper] = paper
-        else
-          input[:local_paper] = paper
-        end
+      end
       
-        Success(input)
-        # rescue StandardError
-        #   raise 'Could not find papers by the ID'
-      end
-        
-
-      def store_paper(input)
-        paper =
-          if (new_paper = input[:remote_paper])
-            Repository::For.entity(new_paper).create(new_paper)
-          else
-            input[:local_paper]
-          end
-        Success(paper)
-      rescue StandardError => error
-        puts error.backtrace.join("\n")
-        Failure('Having trouble accessing the database')
-      end
 
       # following are support methods that other services could use
 
       def paper_from_microsoft(input)
-        MSPaper::PaperMapper
-          .new(App.config.MS_TOKEN)
-          .find_paper(input[:id])
+        Gateway::Api.new(RefEm::App.config)
+          .paper_content(input[:id])
       rescue StandardError
         raise 'Could not find papers by the ID'
-      end
-
-      def paper_in_database(input)
-        Repository::For.klass(Entity::Paper)
-          .find_paper_content(input[:id])
       end
     end
   end
