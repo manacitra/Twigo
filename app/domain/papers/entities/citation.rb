@@ -17,6 +17,7 @@ module RefEm
       attribute :doi,                                     Strict::String.optional
       attribute :venue,                                   Strict::String.optional
       attribute :influential_citation_count,              Strict::Integer.optional
+      attribute :link,                                    Strict::String.optional
 
       def to_attr_hash
         to_hash.reject { |key, _| [:id].include? key}

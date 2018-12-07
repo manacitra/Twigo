@@ -55,10 +55,9 @@ describe 'ShowPaperContent Service Integration Test' do
 
       # .. and find the same paper that was already in the db
       rebuilt = paper_made.value!
-      _(rebuilt.id).must_equal(db_paper.id)
+      _(rebuilt.origin_id).must_equal(db_paper.origin_id)
 
       # ..and provide a project entity with the right details
-      _(rebuilt.origin_id).must_equal(db_paper.origin_id)
       _(rebuilt.title).must_equal(db_paper.title)
       _(rebuilt.year).must_equal(db_paper.year)
       _(rebuilt.doi).must_equal(db_paper.doi)

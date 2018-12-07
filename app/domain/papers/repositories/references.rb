@@ -52,7 +52,8 @@ module RefEm
             issue:          db_record.issue,
             first_page:     db_record.first_page,
             last_page:      db_record.last_page,
-            citation_count: db_record.citation_count
+            citation_count: db_record.citation_count,
+            link:           db_record.link
           )
         end
   

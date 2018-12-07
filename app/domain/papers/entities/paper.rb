@@ -21,21 +21,10 @@ module RefEm
       attribute :references,  Array.of(Reference).optional
       attribute :citations,   Array.of(Citation).optional
       attribute :doi,         Strict::String.optional
-      # attribute :citation_velocity, Strict::Integer
-      # attribute :influential_citation_count, Strict::Integer
+      attribute :link,        Strict::String.optional
 
       def to_attr_hash
         to_hash.reject { |key, _| [:id, :references, :citations].include? key }
-      end
-
-      # change references to top five references
-      def ref_to_top_ref(references_list)
-        references = references_list
-      end
-
-      #change citations to top five citations
-      def cit_to_top_cit(citations_list)
-        citations = citations_list
       end
     end
   end

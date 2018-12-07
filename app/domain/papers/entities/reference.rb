@@ -27,7 +27,7 @@ module RefEm
       attribute :first_page,         Strict::Integer.optional
       attribute :last_page,          Strict::Integer.optional
       attribute :citation_count,     Strict::Integer.optional
-      # attribute :references,  Strict::Array.member(Paper).optional
+      attribute :link,               Strict::String.optional
 
       def to_attr_hash
         to_hash.reject { |key, _| [:id].include? key }

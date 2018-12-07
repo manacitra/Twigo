@@ -44,7 +44,8 @@ module RefEm
           year:                         db_record.year,
           doi:                          db_record.doi,
           venue:                        db_record.venue,
-          influential_citation_count:   db_record.influential_citation_count
+          influential_citation_count:   db_record.influential_citation_count,
+          link:                         db_record.link
         )
       end
 

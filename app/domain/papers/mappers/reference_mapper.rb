@@ -56,7 +56,8 @@ module RefEm
             issue: issue,
             first_page: first_page,
             last_page: last_page,
-            citation_count: citation_count
+            citation_count: citation_count,
+            link: link
           )
         end
 
@@ -142,6 +143,10 @@ module RefEm
 
         def last_page
           @data['E']['LP']
+        end
+
+        def link
+          "https://academic.microsoft.com/#/detail/#{@data['Id']}"
         end
       end
     end
