@@ -18,9 +18,9 @@ gem 'dry-validation'
 # PRESENTATION LAYER
 gem 'slim', '~> 3.0'
 
-# DOMAIN LAYER
-gem 'dry-struct', '~> 0.5'
-gem 'dry-types', '~> 0.5'
+# Representers
+gem 'multi_json'
+gem 'roar'
 
 # INFRASTRUCTURE LAYER
   # Networking gems
@@ -41,9 +41,9 @@ group :production do
 end
 
 # DEBUGGING
-group :development do
-  gem 'debase'
-  gem 'ruby-debug-ide'
+group :development, :test do
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 

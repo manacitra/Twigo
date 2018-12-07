@@ -16,7 +16,6 @@ module Views
     end
 
     def five_citations
-
       citations = []
       for num in 0..4
         citations.push(@citations[num])
