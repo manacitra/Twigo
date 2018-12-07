@@ -67,9 +67,6 @@ namespace :db do
       puts 'Cannot remove production database!'
       return
     end
-
-    FileUtils.rm(@app.config.DB_FILENAME)
-    puts "Deleted #{@app.config.DB_FILENAME}"
   end
 end
 

@@ -27,19 +27,6 @@ gem 'roar'
 gem "httparty"
 gem 'http', '~> 3.0'
 
-  # Database
-gem 'hirb', '~> 0.7'
-gem 'sequel', '~> 5.13'
-
-group :development, :test do
-  gem 'database_cleaner'
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg', '~> 0.18'
-end
-
 # DEBUGGING
 group :development, :test do
   gem 'pry-rescue'
