@@ -14,6 +14,7 @@ module RefEm
     plugin :halt
     plugin :flash
     plugin :all_verbs
+    plugin :caching
 
     use Rack::MethodOverride
 
