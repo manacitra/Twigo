@@ -13,7 +13,6 @@ module RefEm
 
         # Use in client App to create params to send
         def self.to_encoded(list)
-          puts "base4"
           Base64.urlsafe_encode64(list.to_json)
         end
 

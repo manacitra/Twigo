@@ -13,6 +13,12 @@ module RefEm
         @request.get_root.success?
       end
 
+      # show paper in the home page
+      def paper_list(id_list)
+        @request.paper_list(id_list)
+      end
+
+      # get the paper list by keyword
       def papers_list(searchType, keyword)
         @request.papers_list(searchType, keyword)
       end
@@ -32,6 +38,13 @@ module RefEm
           call_api('get')
         end
 
+        # show paper in the home page
+        def paper_list(id_list)
+          call_api('get', ['paper'],
+                   'list' => Value::ListRequest.to_encoded(id_list))
+        end
+
+        # get the paper list by keyword
         def papers_list(searchType, keyword)
           call_api('get', ['paper', searchType, keyword])
         end

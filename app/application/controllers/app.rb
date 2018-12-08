@@ -74,22 +74,21 @@ module RefEm
             keyword: keyword,
             searchType: searchType
           )
-          find_paper = Service::ShowPaperList.new.call(keywords)
+          result = Service::ShowPaperList.new.call(keywords)
           
-          if find_paper.failure?
-            flash[:error] = find_paper.failure
-            routing.redirect '/'
+          if result.failure?
+            flash[:error] = result.failure
+            paper = []
+          else
+            papers = result.value!.papers
           end
-
-          paper = find_paper.value!
           
-          viewable_papers = Views::PaperList.new(paper[:papers], paper[:keyword])
+          viewable_papers = Views::PaperList.new(papers)
 
           view "find_paper", locals: { papers: viewable_papers}
         end
       end
       routing.on 'paper_content' do
-        
         
         routing.on String do |id|
           # DELETE /paper_content/paper_id
@@ -109,7 +108,6 @@ module RefEm
             else
               paper = result.value!.paper
             end
-
     
             # get main paper object value
             session[:watching].insert(0, paper.origin_id).uniq!
