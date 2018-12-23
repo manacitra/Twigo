@@ -41,6 +41,8 @@
                 div class="reference_title" id="reference[#{reference.index_str}].title"
                   a class="reference_detail" id="reference[#{reference.index_str}].link"  href="#{reference.detail_link}"
                     = reference.title
+                  div class="hover"
+                    = reference.content
         -if num == 0
           td rowspan=5 style="text-align: center; vertical-align: middle;"
             .main_paper

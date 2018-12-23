@@ -14,6 +14,7 @@ module RefEm
       include Roar::Decorator::HypermediaConsumer
 
       property :title
+      property :reference_content
       property :link
     end
   end

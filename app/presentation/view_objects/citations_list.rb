@@ -6,7 +6,8 @@ module Views
   # View for a list of citation entities
   class CitationList
     def initialize(citations)
-      @citations = citations.map.with_index { |c, i| Citation.new(c, i)}
+      @citations = citations
+      @citations = citations.map.with_index { |c, i| Citation.new(c, i)} unless citations.nil?
     end
 
     def each
@@ -17,8 +18,10 @@ module Views
 
     def five_citations
       citations = []
-      for num in 0..4
-        citations.push(@citations[num])
+      unless @citations.nil?
+        for num in 0..4
+          citations.push(@citations[num])
+        end
       end
       
       citations.each do |c|

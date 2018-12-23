@@ -68,6 +68,15 @@ h1 {
   padding: 5px 5px 5px 5px;
 }
 
+.reference_title:hover .hover{
+  display:block;
+}
+
+.hover{
+  display:none;
+  background-color:#ffb2b2;
+}
+
 footer {
   padding-top:  0.5in;
   padding-left: 1.5in;

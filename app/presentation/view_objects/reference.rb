@@ -23,6 +23,10 @@ module Views
       def title
         @reference.title
       end
+
+      def content
+        @reference.reference_content
+      end
   
     end
   end
