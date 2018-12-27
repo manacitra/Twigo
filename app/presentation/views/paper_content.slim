@@ -48,8 +48,6 @@
             .main_paper
               = paper.title
         td
-          - if paper.citations.five_citations == [] && num == 2
-            .paper_citation Can not get the citation from semantic scholar
           - paper.citations.five_citations do |citation|
             - if citation.index == num
               .paper_citation
@@ -57,6 +55,7 @@
                 div class="citation_title" id="citation[#{citation.index_str}].title"
                   a class="citation_detail"  href="#{citation.detail_link}"
                     = citation.title
+          
     
     
         
