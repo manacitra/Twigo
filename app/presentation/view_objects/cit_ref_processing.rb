@@ -2,7 +2,7 @@
 
 module Views
   # View object to capture progress bar information
-  class AppraisalProcessing
+  class FetchingProcessing
     def initialize(config, response)
       @response = response
       @config = config
