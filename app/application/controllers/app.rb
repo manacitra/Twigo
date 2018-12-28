@@ -23,9 +23,9 @@ module RefEm
 
       # GET /
       routing.root do
-        
+
         session[:watching] ||= []
-        
+
         result = Service::ListPapers.new.call(session[:watching])
 
         if result.failure?
@@ -34,7 +34,7 @@ module RefEm
         else
           papers = result.value!.papers
         end
-            
+
         session[:watching] = papers.map(&:origin_id)
 
         viewable_papers = Views::PaperList.new(papers)
@@ -45,12 +45,9 @@ module RefEm
         routing.is do
           # POST /find_paper/
           routing.post do
-            # need refactor
-            # for now we only accept 1 parameter in the query
-            # query format: keyword
             # Redirect viewer to project page
             keyword = routing.params['paper_query'].downcase
-            #decide which type user want to search (keyword or title)
+            # decide which type user want to search (keyword or title)
             searchType = routing.params['searchType'].downcase
 
             if keyword == '' || keyword == nil
@@ -75,21 +72,21 @@ module RefEm
             searchType: searchType
           )
           result = Service::ShowPaperList.new.call(keywords)
-          
+
           if result.failure?
             flash[:error] = result.failure
             paper = []
           else
             papers = result.value!.papers
           end
-          
+
           viewable_papers = Views::PaperList.new(papers)
 
           view "find_paper", locals: { papers: viewable_papers}
         end
       end
       routing.on 'paper_content' do
-        
+
         routing.on String do |id|
           # DELETE /paper_content/paper_id
           routing.delete do
@@ -108,7 +105,7 @@ module RefEm
             else
               paper = result.value!.paper
             end
-    
+
             # get main paper object value
             session[:watching].insert(0, paper.origin_id).uniq!
 
