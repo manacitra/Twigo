@@ -2,7 +2,7 @@
 
 module Views
   # View object to capture progress bar information
-  class FetchingProcessing
+  class PaperProcessing
     def initialize(config, response)
       @response = response
       @config = config

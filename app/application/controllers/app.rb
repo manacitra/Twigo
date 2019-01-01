@@ -98,20 +98,24 @@ module RefEm
           routing.get do
             # GET /paper_content/paper_id
             result = Service::ShowPaperContent.new.call(id: id)
+            ranked_paper = OpenStruct.new(result.value!)
 
-            if result.failure?
-              flash[:error] = result.failure
-              paper = []
+            if ranked_paper.response.processing?
+              flash.now[:notice] = 'Paper is being gotten and analyzed'
             else
-              paper = result.value!.paper
+              paper = ranked_paper.paper
+              # add the paper into cache
+              session[:watching].insert(0, paper.origin_id).uniq!
+              viewable_paper = Views::Paper.new(paper)
             end
+            
+            # add processing bar view object
+            processing = Views::PaperProcessing.new(
+              App.config, ranked_paper.response
+            )
 
-            # get main paper object value
-            session[:watching].insert(0, paper.origin_id).uniq!
-
-            viewable_paper = Views::Paper.new(paper)
-
-            view 'paper_content', locals: { paper: viewable_paper }
+            view 'paper_content', locals: { paper: viewable_paper,
+                                            processing: processing }
           end
         end
         # GET /paper_content/
