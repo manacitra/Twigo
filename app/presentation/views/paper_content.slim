@@ -1,60 +1,96 @@
 .container
-  table.table id="main_paper_table"
-    tbody
-      tr id="paper_row"
-        td id="paper_data"
-          .paper_title
-            span.paper.attribute Title: 
-            span class="paper_title" id="paper.title"
-              a class="paper_detail" id="paper.link" href="#{paper.detail_link}"
+  - if processing.in_progress?
+    .progress
+    .progress-bar.bg-success.progress-bar-striped.active[
+      role="progressbar" aria-valuenow="10" aria-valuemin="0"
+      aria-valuemax="100" style="width:0%"]
+    script src = "#{processing.ws_javascript}"
+    javascript:
+      var channel = "#{processing.ws_channel_id}";
+      var client = new Faye.Client("#{processing.ws_route}");
+      var bar = document.getElementsByClassName("progress-bar")[0];
+      var reg = /\:(\d+)%/
+      client.subscribe('/' + channel, function(message) {
+        // Collect progressbar element and percentage
+        var progress = bar.getAttribute("style")
+        var currentProgress = reg.exec(progress)[1]
+        
+        if (isNaN(message)) {
+          bar.setAttribute("style", "width:100%")
+          bar.setAttribute("class", "progress-bar bg-danger progress-bar-striped")
+          bar.innerHTML = message
+        } else {
+          if (parseInt(message) > parseInt(currentProgress)) {
+            // Set the progress bar and percentage
+            bar.setAttribute("aria-valuenow", message)
+            bar.setAttribute("style", "width:"+message+"%")
+            bar.innerHTML = message+"%"
+            // Reoad page at 100%
+            if (message == "100") {
+              setTimeout(function () {
+                window.location = window.location.href
+              }, 1000);
+            }
+          }
+        }
+      });
+  -  else
+    table.table id="main_paper_table"
+      tbody
+        tr id="paper_row"
+          td id="paper_data"
+            .paper_title
+              span.paper.attribute Title: 
+              span class="paper_title" id="paper.title"
+                a class="paper_detail" id="paper.link" href="#{paper.detail_link}"
+                  = paper.title
+
+            .paper_author
+              span.paper.attribute Author: 
+              span class="paper_author" id="paper.author"
+                = paper.author
+
+            .paper_year
+              span.paper.attribute Year: 
+              span class="paper_year" id="paper.year"
+                = paper.year
+
+            .paper_doi
+              span.paper.attribute DOI: 
+              span class="paper_doi" id="paper.doi"
+                = paper.doi
+
+    table class="table papers_table" id="papers_table"
+      thead
+        tr
+          th References
+          th Paper
+          th Citations
+      tbody
+      - for num in 0..4
+        tr
+          td id="reference_col"
+            - paper.references.five_references do |reference|
+              - if reference.index == num
+                .paper_reference
+                  span.reference.attribute #{reference.index_str}. Reference Title:
+                  div class="reference_title" id="reference[#{reference.index_str}].title"
+                    a class="reference_detail" id="reference[#{reference.index_str}].link"  href="#{reference.detail_link}"
+                      = reference.title
+                    div class="hover"
+                      = reference.content
+          -if num == 0
+            td rowspan=5 style="text-align: center; vertical-align: middle;"
+              .main_paper
                 = paper.title
-
-          .paper_author
-            span.paper.attribute Author: 
-            span class="paper_author" id="paper.author"
-              = paper.author
-
-          .paper_year
-            span.paper.attribute Year: 
-            span class="paper_year" id="paper.year"
-              = paper.year
-
-          .paper_doi
-            span.paper.attribute DOI: 
-            span class="paper_doi" id="paper.doi"
-              = paper.doi
-
-  table class="table papers_table" id="papers_table"
-    thead
-      tr
-        th References
-        th Paper
-        th Citations
-    tbody
-    - for num in 0..4
-      tr
-        td id="reference_col"
-          - paper.references.five_references do |reference|
-            - if reference.index == num
-              .paper_reference
-                span.reference.attribute #{reference.index_str}. Reference Title:
-                div class="reference_title" id="reference[#{reference.index_str}].title"
-                  a class="reference_detail" id="reference[#{reference.index_str}].link"  href="#{reference.detail_link}"
-                    = reference.title
-                  div class="hover"
-                    = reference.content
-        -if num == 0
-          td rowspan=5 style="text-align: center; vertical-align: middle;"
-            .main_paper
-              = paper.title
-        td
-          - paper.citations.five_citations do |citation|
-            - if citation.index == num
-              .paper_citation
-                span.citation.attribute #{citation.index_str}. Citation Title:
-                div class="citation_title" id="citation[#{citation.index_str}].title"
-                  a class="citation_detail"  href="#{citation.detail_link}"
-                    = citation.title
+          td
+            - paper.citations.five_citations do |citation|
+              - if citation.index == num
+                .paper_citation
+                  span.citation.attribute #{citation.index_str}. Citation Title:
+                  div class="citation_title" id="citation[#{citation.index_str}].title"
+                    a class="citation_detail"  href="#{citation.detail_link}"
+                      = citation.title
           
     
     
