@@ -15,22 +15,29 @@ module RefEm
 
       def find_main_paper(input)
 
-        result = paper_from_microsoft(input)
+        input[:response] = paper_from_microsoft(input)
 
-        result.success? ? Success(result.payload) : Failure(result.message)
+        input[:response].success? ? Success(input) : Failure(response.message)
       rescue StandardError
         Failure('Could not access our API')
       end
 
-      def reify_paper(paper_json)
-        begin
-          Representer::TopPaper.new(OpenStruct.new)
-           .from_json(paper_json)
-           .yield_self { |papers| Success(papers)}
+      def reify_paper(input)
+        puts "response: #{input[:response]}"
+        unless input[:response].processing?
           
-        rescue StandardError
-          Failure('Error in the paper -- please try again later')
+          redis = Redis.new(url: RefEm::Api.config.REDISCLOUD_URL)
+          paper = redis.get(request_id)
+
+          
+          Representer::TopPaper.new(OpenStruct.new)
+           .from_json(paper)
+           .yield_self { |papers| input[:papers] = papers}
         end
+          
+        Success(input)
+      rescue StandardError
+        Failure('Error in the paper -- please try again later')
       end
       
 

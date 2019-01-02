@@ -31,7 +31,7 @@ module RefEm
       class Request
         def initialize(config)
           @api_host = config.API_HOST
-          @api_root = config.API_HOST + 'api/v1'
+          @api_root = config.API_HOST + '/api/v1'
         end
 
         def get_root
@@ -81,7 +81,27 @@ module RefEm
         end
 
         def message
-          payload(message)
+          JSON.parse(payload)['message']
+        end
+
+        def payload
+          body.to_s
+        end
+
+        def failure?
+          !success?
+        end
+
+        def ok?
+          code == 200
+        end
+
+        def added?
+          code == 201
+        end
+
+        def processing?
+          code == 202
         end
 
         def payload

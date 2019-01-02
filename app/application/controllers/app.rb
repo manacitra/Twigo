@@ -103,7 +103,7 @@ module RefEm
             if ranked_paper.response.processing?
               flash.now[:notice] = 'Paper is being gotten and analyzed'
             else
-              paper = ranked_paper.paper
+              paper = ranked_paper.papers
               # add the paper into cache
               session[:watching].insert(0, paper.origin_id).uniq!
               viewable_paper = Views::Paper.new(paper)
