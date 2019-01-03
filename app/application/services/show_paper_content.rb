@@ -23,13 +23,9 @@ module RefEm
       end
 
       def reify_paper(input)
-        puts "response: #{input[:response]}"
         unless input[:response].processing?
-          
-          redis = Redis.new(url: RefEm::Api.config.REDISCLOUD_URL)
-          paper = redis.get(request_id)
 
-          
+          paper = input[:response].payload
           Representer::TopPaper.new(OpenStruct.new)
            .from_json(paper)
            .yield_self { |papers| input[:papers] = papers}
