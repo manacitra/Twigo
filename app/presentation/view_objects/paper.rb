@@ -45,7 +45,7 @@ module Views
     end
 
     def references
-      ReferenceList.new(@paper.references)
+      ReferenceList.new(@paper.refs)
     end
 
     def citations
