@@ -39,7 +39,7 @@ module RefEm
         session[:watching] = papers.map(&:origin_id)
 
         viewable_papers = Views::PaperList.new(papers)
-        view 'homes', locals: { papers: viewable_papers}
+        view 'homepage', locals: { papers: viewable_papers}
       end
 
       routing.on 'find_paper' do
