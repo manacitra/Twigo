@@ -98,6 +98,12 @@ module RefEm
           routing.get do
             # GET /paper/paper_id
             result = Service::ShowPaperContent.new.call(id: id)
+
+            if result.failure?
+              flash[:error] = "Too many citations paper thread limit"
+              routing.redirect '/'
+            end
+
             ranked_paper = OpenStruct.new(result.value!)
 
             if ranked_paper.response.processing?
