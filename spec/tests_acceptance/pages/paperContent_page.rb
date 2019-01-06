@@ -4,7 +4,7 @@
 class PaperContentPage
   include PageObject
 
-  page_url RefEm::App.config.APP_HOST + '/paper_content/<%=params[:keyword]%>/<%=params[:id]%>'
+  page_url RefEm::App.config.APP_HOST + '/paper/<%=params[:keyword]%>/<%=params[:id]%>'
 
   div(:warning_message, id: 'flash_bar_danger')
   table(:papers_table, id: 'papers_table')
