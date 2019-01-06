@@ -13,7 +13,7 @@ module Views
     end
 
     def graph_link
-      "/paper_content/#{@paper.origin_id}"
+      "/paper/#{@paper.origin_id}"
     end
 
     def detail_link
