@@ -100,7 +100,7 @@ module RefEm
             result = Service::ShowPaperContent.new.call(id: id)
 
             if result.failure?
-              flash[:error] = "Too many citations paper thread limit"
+              flash[:error] = 'Too Many Citations: Thread Limit'
               routing.redirect '/'
             end
 
