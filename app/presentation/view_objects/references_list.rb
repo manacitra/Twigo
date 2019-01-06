@@ -6,7 +6,6 @@ module Views
   # View for a list of reference entities
   class ReferenceList
     def initialize(references)
-      puts "refeeeeee: #{references}"
       @references = references.map.with_index { |r, i| Reference.new(r, i)}
     end
 

@@ -111,7 +111,7 @@ module RefEm
             else
               paper = ranked_paper.papers
               # add the paper into cache
-              session[:watching].insert(0, paper.origin_id).uniq!
+              session[:watching].insert(0, paper.paper.origin_id).uniq!
               viewable_paper = Views::Paper.new(paper[:paper])
             end
             
