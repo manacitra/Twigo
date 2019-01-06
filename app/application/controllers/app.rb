@@ -85,10 +85,10 @@ module RefEm
           view "find_paper", locals: { papers: viewable_papers}
         end
       end
-      routing.on 'paper_content' do
+      routing.on 'paper' do
 
         routing.on String do |id|
-          # DELETE /paper_content/paper_id
+          # DELETE /paper/paper_id
           routing.delete do
             session[:watching].delete(id.to_i)
 
@@ -96,7 +96,7 @@ module RefEm
           end
 
           routing.get do
-            # GET /paper_content/paper_id
+            # GET /paper/paper_id
             result = Service::ShowPaperContent.new.call(id: id)
             ranked_paper = OpenStruct.new(result.value!)
 
@@ -108,7 +108,7 @@ module RefEm
               session[:watching].insert(0, paper.origin_id).uniq!
               viewable_paper = Views::Paper.new(paper[:paper])
             end
-
+            
             # add processing bar view object
             processing = Views::PaperProcessing.new(
               App.config, ranked_paper.response
