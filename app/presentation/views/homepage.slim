@@ -1,0 +1,67 @@
+header class="masthead text-white text-center"
+  div class="overlay"
+  div class="container"
+    div class="row"
+      div class="col-xl-9 mx-auto"
+        h1 class="mb-5 color-gray" Browse Your Paper <br> and Get Smarter!
+      div class="col-md-10 col-lg-8 col-xl-7 mx-auto"
+        form role="form" action="/find_paper" method='POST' id='show-project-form'
+          .row.vertical-align.query-bar
+            .col-md-2.col-sm-2
+              .text-right.text-big Search:
+            .col-md-8.col-sm-7.cancel-display
+              .row
+                .col-md-12.col-sm-12
+                  input {
+                    type='text' name='paper_query'
+                    id='paper_query_input' class="form-control form-control-lg"
+                    placeholder="e.g. 'internet'"
+                  }
+                .row
+                  .col-md-12.col-sm-12
+                   div class="form-check form-check-inline" style="padding-left:20pt"
+                    input {
+                      type='radio' name='searchType'
+                      id='search_keyword' value='keyword' checked='checked'
+                    }
+                    label class="form-check-label" for="inlineRadioOptions" style="font-size:23px" Keyword
+                    div class="form-check form-check-inline" style="margin-right: 0em"
+                      input {
+                      type='radio' name='searchType'
+                      id='search_title' value='title' style="margin-left: 20px"
+                      }
+                    label class="form-check-label" for="inlineRadioOptions" style="font-size:23px" Title
+            .col-md-2.col-sm-3
+              button {
+                type='submit' id='paper_search-submit' class='submit btn-lg'
+                value='submit' class="btn btn-success"
+              } Find Paper
+.container
+  .row
+    .col-md-12.blank-row
+  - if papers.any?
+    table class="table table-hover" id="papers_table"
+      thead
+        tr
+          th Index
+          th Title
+          th Authors
+          th 
+      tbody
+        - papers.each do |paper|
+          tr class="table-row paper_row" data-href=paper.graph_link id="#{paper.index_str}.row"
+            td id='td_index'
+              span class="paper_index" id="#{paper.index_str}.index" #{paper.index}
+            td id='td_title'
+              span class="paper_title" id="#{paper.index_str}.title"
+                a href=paper.graph_link id="#{paper.index_str}.link"
+                  = paper.title
+            td id='td_author'
+              span clss="paper_author"  id="#{paper.index_str}.author"
+                = paper.author
+            td id='delete_paper'
+              form role='form' method='post' action=paper.graph_link
+                input type='hidden' name='_method' value='delete'
+                button type="submit" class="btn btn-lg btn-link" id="#{paper.index_str}.delete"
+                  i class="fas fa-trash-alt" 
+
