@@ -104,6 +104,10 @@ module RefEm
           code == 202
         end
 
+        def cannot_process?
+          code == 422
+        end
+
         def payload
           body.to_s
         end
