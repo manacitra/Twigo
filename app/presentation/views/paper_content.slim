@@ -3,7 +3,7 @@
     .progress
     .progress-bar.bg-success.progress-bar-striped.active[
       role="progressbar" aria-valuenow="10" aria-valuemin="10"
-      aria-valuemax="100" style="width:0%"]
+      aria-valuemax="100" style="width:10%"]10%
     script src = "#{processing.ws_javascript}"
     javascript:
       var channel = "#{processing.ws_channel_id}";
@@ -34,6 +34,10 @@
           }
         }
       });
+    .container
+      .row
+        .col-md-12.col-sm-12
+          img src="https://vignette.wikia.nocookie.net/grand-line-roleplay/images/7/71/Shoryuken-gif-5.gif/revision/latest?cb=20170920035212"
   -  else
     table.table id="main_paper_table"
       tbody
