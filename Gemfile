@@ -61,4 +61,3 @@ gem 'solargraph'
 group :development, :test do
   gem 'rerun', '~> 0.13'
 end
-

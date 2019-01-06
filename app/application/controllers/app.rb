@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'roda'
 require 'slim'
 require 'slim/include'
@@ -23,7 +25,6 @@ module RefEm
 
       # GET /
       routing.root do
-
         session[:watching] ||= []
 
         result = Service::ListPapers.new.call(session[:watching])
@@ -82,11 +83,10 @@ module RefEm
 
           viewable_papers = Views::PaperList.new(papers)
 
-          view "find_paper", locals: { papers: viewable_papers}
+          view 'find_paper', locals: { papers: viewable_papers}
         end
       end
       routing.on 'paper' do
-
         routing.on String do |id|
           # DELETE /paper/paper_id
           routing.delete do
@@ -114,7 +114,7 @@ module RefEm
               session[:watching].insert(0, paper.paper.origin_id).uniq!
               viewable_paper = Views::Paper.new(paper[:paper])
             end
-            
+
             # add processing bar view object
             processing = Views::PaperProcessing.new(
               App.config, ranked_paper.response

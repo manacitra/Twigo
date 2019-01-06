@@ -51,6 +51,5 @@ module Views
     def citations
       CitationList.new(@paper.citations)
     end
-
   end
 end
