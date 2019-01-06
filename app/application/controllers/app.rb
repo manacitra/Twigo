@@ -9,7 +9,8 @@ module RefEm
     include RouteHelpers
     plugin :render, engine: 'slim', views: 'app/presentation/views'
     plugin :assets, path: 'app/presentation/assets',
-                    css: 'style.css',
+                    scss: 'app/presentation/assets/scss/*.scss',
+                    css: ['style.css', 'landing-page.css', 'landing-page.min.css'],
                     js: 'customize.js'
     plugin :halt
     plugin :flash
@@ -38,7 +39,7 @@ module RefEm
         session[:watching] = papers.map(&:origin_id)
 
         viewable_papers = Views::PaperList.new(papers)
-        view 'home', locals: { papers: viewable_papers }
+        view 'homes', locals: { papers: viewable_papers}
       end
 
       routing.on 'find_paper' do

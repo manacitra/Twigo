@@ -63,10 +63,7 @@ h1 {
   border: 2px solid gray;
 }
 
-.query-bar {
-  background-color: #eeeeee;
-  padding: 5px 5px 5px 5px;
-}
+
 
 .reference_title:hover .hover{
   display:block;
