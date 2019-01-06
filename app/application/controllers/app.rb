@@ -90,7 +90,7 @@ module RefEm
         routing.on String do |id|
           # DELETE /paper/paper_id
           routing.delete do
-            session[:watching].delete(id.to_i)
+            session[:watching].delete(id)
 
             routing.redirect '/'
           end
