@@ -17,4 +17,4 @@
 
   production:
     # Infrastructure
-    API_HOST: http://refem-api.herokuapp.com
+    API_HOST: https://refem-api.herokuapp.com
